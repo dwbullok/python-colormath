@@ -77,3 +77,18 @@ IPTColor
 ---------
 
 .. autoclass:: colormath.color_objects.IPTColor
+
+ICHptColor
+---------
+
+.. autoclass:: colormath.color_objects.ICHptColor
+
+hIPTColor
+---------
+
+.. autoclass:: colormath.color_objects.hIPTColor
+
+hICHptColor
+---------
+
+.. autoclass:: colormath.color_objects.hICHptColor

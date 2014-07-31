@@ -12,7 +12,7 @@ from colormath import density
 from colormath.chromatic_adaptation import apply_chromatic_adaptation_on_color
 from colormath.color_exceptions import InvalidObserverError, InvalidIlluminantError
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger( __name__)
 
 
 class ColorBase(object):
@@ -825,3 +825,80 @@ class IPTColor(ColorBase):
     @property
     def hue_angle(self):
         return numpy.arctan2(self.ipt_t, self.ipt_p)
+
+class hIPTColor(ColorBase):
+    """
+    Represents an IPT color.
+
+    Reference:
+    Fairchild, M. D. (2013). Color appearance models, 3rd Ed. (pp. 406-407).
+    John Wiley & Sons.
+    """
+
+    VALUES = ['ipt_i', 'ipt_p', 'ipt_t']
+
+    def __init__(self, ipt_i, ipt_p, ipt_t):
+        """
+        :param ipt_i: I coordinate.
+        :param ipt_p: P coordinate.
+        :param ipt_t: T coordinate.
+        """
+
+        super(hIPTColor, self).__init__()
+        #: I coordinate
+        self.ipt_i = ipt_i
+        #: P coordinate
+        self.ipt_p = ipt_p
+        #: T coordinate
+        self.ipt_t = ipt_t
+
+    @property
+    def hue_angle(self):
+        return numpy.arctan2(self.ipt_t, self.ipt_p)
+
+
+class ICHptColor(ColorBase):
+    """
+    Cylindrical coordinate version of IPT.
+    """
+
+    VALUES = ['ich_i', 'ich_c', 'ich_h']
+
+    def __init__(self, ich_i, ich_c, ich_h):
+        """
+        :param float ich_i: I coordinate.
+        :param float ich_c: C coordinate.
+        :param float ich_h: H coordinate.
+        """
+
+        super(ICHptColor, self).__init__()
+        #: I coordinate
+        self.ich_i = float(ich_i)
+        #: C coordinate
+        self.ich_c = float(ich_c)
+        #: H coordinate
+        self.ich_h = float(ich_h)
+
+
+class hICHptColor(ColorBase):
+    """
+    Cylindrical coordinate version of hdrIPT.
+    """
+
+    VALUES = ['ich_i', 'ich_c', 'ich_h']
+
+    def __init__(self, ich_i, ich_c, ich_h):
+        """
+        :param float ich_i: I coordinate.
+        :param float ich_c: C coordinate.
+        :param float ich_h: H coordinate.
+        """
+
+        super(hICHptColor, self).__init__()
+        #: J coordinate
+        self.ich_i = float(ich_i)
+        #: C coordinate
+        self.ich_c = float(ich_c)
+        #: H coordinate
+        self.ich_h = float(ich_h)
+
